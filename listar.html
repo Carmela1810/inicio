@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Registros</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="mt-5">Lista de Registros</h1>
+
+        <table class="table table-striped mt-3">
+            <thead>
+                <tr>
+                    <th scope="col">Índice</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Edad</th>
+                    <th scope="col">Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Aquí se agregarán dinámicamente los registros -->
+
+                {% for registro in registros %}
+                <div class="card mb-3" style="max-width: 540px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="https://dummyimage.com/300x400/343a40/6c757d"
+                                class="img-fluid rounded-start w-100" alt="...">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{registro['nombre']}}</h5>
+                                <p class="card-text"><small class="text-body-secondary">el proyecto toma: {{registro['edad']}} mes/es de tiempo</small></p>
+                            </div>
+                        </div>
+                        <form method="post">
+                            <div class="btn btn-primary">
+                                modificar
+                            </div>
+                        </form>
+                        <form method="post">
+                            <div class="btn btn-danger">
+                                borrar
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script>
+        // Este script simula la adición de datos a la tabla.
+        document.addEventListener('DOMContentLoaded', function () {
+            const registros = [
+                { nombre: 'Juan', edad: 25, email: 'juan@example.com' },
+                { nombre: 'María', edad: 30, email: 'maria@example.com' }
+            ];
+
+            const tbody = document.querySelector('tbody');
+
+            registros.forEach((registro, index) => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <th scope="row">${index}</th>
+                    <td>${registro.nombre}</td>
+                    <td>${registro.edad}</td>
+                    <td>${registro.email}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        });
+    </script>
+</body>
+
+</html>
